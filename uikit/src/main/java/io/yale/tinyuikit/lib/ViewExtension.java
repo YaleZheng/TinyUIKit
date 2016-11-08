@@ -264,6 +264,11 @@ public class ViewExtension {
         v_setText(finder, text);
     }
 
+    public static void v_setText(TextView target, CharSequence text) {
+        SafeFunc0<TextView> finder = newFinder(target);
+        v_setText(finder, text);
+    }
+
     public static void v_setText(SafeFunc0<TextView> finder, final CharSequence text) {
         safeOperateView(finder, new SafeAction1<TextView>() {
             @Override
@@ -274,19 +279,27 @@ public class ViewExtension {
     }
 
     public static void v_setImageDrawable(Activity holder, int targetID, final Drawable drawable) {
-        v_setImageDrawable(holder, targetID, drawable);
+        SafeFunc0<ImageView> finder = newFinder(holder, targetID);
+        v_setImageDrawable(finder, drawable);
     }
 
     public static void v_setImageDrawable(Fragment holder, int targetID, final Drawable drawable) {
-        v_setImageDrawable(holder, targetID, drawable);
+        SafeFunc0<ImageView> finder = newFinder(holder, targetID);
+        v_setImageDrawable(finder, drawable);
     }
 
     public static void v_setImageDrawable(Dialog holder, int targetID, final Drawable drawable) {
-        v_setImageDrawable(holder, targetID, drawable);
+        SafeFunc0<ImageView> finder = newFinder(holder, targetID);
+        v_setImageDrawable(finder, drawable);
     }
 
     public static void v_setImageDrawable(View holder, int targetID, final Drawable drawable) {
-        v_setImageDrawable(holder, targetID, drawable);
+        SafeFunc0<ImageView> finder = newFinder(holder, targetID);
+        v_setImageDrawable(finder, drawable);
+    }
+
+    public static void v_setImageDrawable(ImageView target, final Drawable drawable) {
+        v_setImageDrawable(newFinder(target), drawable);
     }
 
     public static void v_setImageDrawable(SafeFunc0<ImageView> finder, final Drawable drawable) {

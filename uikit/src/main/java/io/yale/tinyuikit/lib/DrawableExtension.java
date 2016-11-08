@@ -1,5 +1,6 @@
 package io.yale.tinyuikit.lib;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -21,9 +22,16 @@ import java.util.List;
  */
 
 public class DrawableExtension {
-    private static Context ctx;
+    private static Application ctx;
 
     private DrawableExtension() {
+    }
+
+    public static void init(Application application) {
+        ctx = application;
+    }
+
+    public static void destroy() {
     }
 
     public static RoundCornerDrawableBuilder newRoundCornerDrawable(int fillColor, int radiusInPx) {
