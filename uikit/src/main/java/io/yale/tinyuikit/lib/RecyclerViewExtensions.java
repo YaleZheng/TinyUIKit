@@ -97,6 +97,14 @@ public class RecyclerViewExtensions {
                     int viewType = getItemViewType(position);
                     if (viewType == VIEW_TYPE_HEADER || viewType == VIEW_TYPE_FOOTER) {
                         FrameLayout itemView = (FrameLayout) vh.itemView;
+                        View contentView = viewType == VIEW_TYPE_HEADER ? getHeader(position) : getFooter(position);
+                        View oldContentView = itemView.getChildCount() > 0 ? itemView.getChildAt(0) : null;
+                        if (oldContentView == null || oldContentView != contentView) {
+                            itemView.removeAllViewsInLayout();
+                            itemView.addView(contentView);
+                        } else {
+                            itemView.requestLayout();
+                        }
                     } else {
                         onBindVH.call(this, vh, position);
                     }
@@ -135,8 +143,10 @@ public class RecyclerViewExtensions {
             return currentHeaderCount + currentItemCount + currentFooterCount;
         }
 
-        public T getItem(int position) {
-            if (position >= 0 && position < items.size()) {
+
+        public T getItem(int adapterPosition) {
+            int position = adapterPosition - this.currentHeaderCount;
+            if (position >= 0 && position < this.currentItemCount) {
                 return items.get(position);
             }
             return null;
@@ -163,6 +173,16 @@ public class RecyclerViewExtensions {
             }
         }
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        public View getHeader(int adapterPosition) {
+            int position = adapterPosition;
+            if (position >= 0 && position < this.currentHeaderCount) {
+                return this.headers.get(position);
+            }
+
+            return null;
+        }
+
         public void addHeader(View header) {
             if (header != null && !headers.contains(header)) {
                 this.headers.add(header);
@@ -175,6 +195,15 @@ public class RecyclerViewExtensions {
                 headers.remove(header);
                 computeHeaderCount();
             }
+        }
+
+        public View getFooter(int adapterPosition) {
+            int position = adapterPosition - this.currentHeaderCount - this.currentItemCount;
+            if (position >= 0 && position <= this.currentFooterCount) {
+                return this.footers.get(position);
+            }
+
+            return null;
         }
 
         public void addFooter(View footer) {
