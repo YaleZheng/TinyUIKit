@@ -36,7 +36,7 @@ public class ViewExtension {
         }
     }
 
-    private static void handleException(Exception e) {
+    protected static void handleException(Exception e) {
         e.printStackTrace();
     }
 
@@ -197,6 +197,64 @@ public class ViewExtension {
             @Override
             public void call(View view) throws Exception {
                 view.setBackgroundDrawable(drawable);
+            }
+        });
+    }
+
+    public static void v_setClickListener(Activity holder, int targetID, View.OnClickListener listener) {
+        v_setClickListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setClickListener(Fragment holder, int targetID, View.OnClickListener listener) {
+        v_setClickListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setClickListener(Dialog holder, int targetID, View.OnClickListener listener) {
+        v_setClickListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setClickListener(View holder, int targetID, View.OnClickListener listener) {
+        v_setClickListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setClickListener(View target, View.OnClickListener listener) {
+        v_setClickListener(newFinder(target), listener);
+    }
+
+    public static void v_setClickListener(SafeFunc0<View> finder, final View.OnClickListener listener) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setOnClickListener(listener);
+            }
+        });
+    }
+
+    public static void v_setFocusChangeListener(Activity holder, int targetID, View.OnFocusChangeListener listener) {
+        v_setFocusChangeListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setFocusChangeListener(Fragment holder, int targetID, View.OnFocusChangeListener listener) {
+        v_setFocusChangeListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setFocusChangeListener(Dialog holder, int targetID, View.OnFocusChangeListener listener) {
+        v_setFocusChangeListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setFocusChangeListener(View holder, int targetID, View.OnFocusChangeListener listener) {
+        v_setFocusChangeListener(newFinder(holder, targetID), listener);
+    }
+
+    public static void v_setFocusChangeListener(View target, View.OnFocusChangeListener listener) {
+        v_setFocusChangeListener(newFinder(target), listener);
+    }
+
+    public static void v_setFocusChangeListener(SafeFunc0<View> finder, final View.OnFocusChangeListener listener) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setOnFocusChangeListener(listener);
             }
         });
     }
