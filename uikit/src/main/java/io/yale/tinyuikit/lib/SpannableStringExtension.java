@@ -2,7 +2,9 @@ package io.yale.tinyuikit.lib;
 
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 
 import static android.text.SpannableStringBuilder.valueOf;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
@@ -13,6 +15,24 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
 public class SpannableStringExtension {
     private SpannableStringExtension() {
+    }
+
+    public static SpannableStringBuilder s_setRelativeFontSize(CharSequence text, float scale) {
+        return s_setRelativeFontSize(valueOf(text), scale);
+    }
+
+    public static SpannableStringBuilder s_setRelativeFontSize(SpannableStringBuilder text, float scale) {
+        s_setSpan(text, new RelativeSizeSpan(scale));
+        return text;
+    }
+
+    public static SpannableStringBuilder s_setFontSize(CharSequence text, int sizeInPx) {
+        return s_setFontSize(valueOf(text), sizeInPx);
+    }
+
+    public static SpannableStringBuilder s_setFontSize(SpannableStringBuilder text, int sizeInPx) {
+        s_setSpan(text, new AbsoluteSizeSpan(sizeInPx, false));
+        return text;
     }
 
     public static SpannableStringBuilder s_setTextColor(CharSequence text, int color) {
@@ -52,5 +72,11 @@ public class SpannableStringExtension {
             ret = ret.append(other);
         }
         return first;
+    }
+
+    private static void s_setSpan(SpannableStringBuilder text, Object span) {
+        if (!TextUtils.isEmpty(text)) {
+            text.setSpan(span, 0, text.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
     }
 }
