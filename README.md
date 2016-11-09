@@ -64,7 +64,6 @@ provide some helper function to simple your programing on ui
     rv.setAdapter(new MyAdapter());
     
     \\ now
-    SimpleAdapter<T> adapter = RecyclerViewExtension.newAdapter();
     rv.setAdapter(RecyclerViewExtension.newAdapter()
         .oncreateVH((adapter, parent,viewType) -> {
             ...
