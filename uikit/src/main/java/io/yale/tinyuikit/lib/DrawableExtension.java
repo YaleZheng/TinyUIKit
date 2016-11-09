@@ -1,9 +1,6 @@
 package io.yale.tinyuikit.lib;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -11,11 +8,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.drawable.shapes.Shape;
-import android.print.PrintAttributes;
-
-import java.util.List;
 
 /**
  * Created by yalez on 2016/11/8.

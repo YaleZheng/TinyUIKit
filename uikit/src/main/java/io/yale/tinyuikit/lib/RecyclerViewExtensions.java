@@ -1,6 +1,9 @@
 package io.yale.tinyuikit.lib;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.FrameLayout;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.yale.tinyuikit.lib.func.SafeAction1;
 import rx.functions.Action3;
 import rx.functions.Action4;
 import rx.functions.Func2;
@@ -20,6 +24,67 @@ import rx.functions.Func2;
 
 public class RecyclerViewExtensions {
     private RecyclerViewExtensions() {
+    }
+
+    public static class DividerParams {
+        private int color = 0;
+        private int height = 0;
+        private int marginTop = 0;
+        private int marginBottom = 0;
+        private int marginStart = 0;
+        private int marginEnd = 0;
+
+        public DividerParams setColor(int color) {
+            this.color = color;
+            return this;
+        }
+
+        public DividerParams setHeight(int height) {
+            this.height = height;
+            return this;
+        }
+
+        public DividerParams setMargin(int margin) {
+            return setMargin(margin, margin, margin, margin);
+        }
+
+        public DividerParams setMargin(int marginH, int marginV) {
+            return setMargin(marginH, marginV, marginH, marginV);
+        }
+
+        public DividerParams setMargin(int marginStart, int marginTop, int marginEnd, int marginBottom) {
+            this.marginStart = marginStart;
+            this.marginTop = marginTop;
+            this.marginEnd = marginEnd;
+            this.marginBottom = marginBottom;
+            return this;
+        }
+    }
+
+    public static void addDividerHorizontal(final RecyclerView recyclerView, final DividerParams params) {
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            Rect rect = new Rect();
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+            @Override
+            public void onDrawOver(final Canvas c, RecyclerView rv, RecyclerView.State state) {
+                super.onDrawOver(c, rv, state);
+                int width = rv.getWidth();
+                ViewExtension.v_forEach(rv, new SafeAction1<View>() {
+                    @Override
+                    public void call(View child) throws Exception {
+                        child.getLocalVisibleRect(rect);
+                        rect.set(rect.left + params.marginStart,
+                                rect.bottom + params.marginTop,
+                                rect.right - params.marginEnd,
+                                rect.bottom + params.height - params.marginBottom);
+                        paint.setStyle(Paint.Style.FILL);
+                        paint.setColor(params.color);
+                        c.drawRect(rect, paint);
+                    }
+                });
+            }
+        });
     }
 
     public static <T> AdapterBuilder<T> newAdapter(List<T> items) {

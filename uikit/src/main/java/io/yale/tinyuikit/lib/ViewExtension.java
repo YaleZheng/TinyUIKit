@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.function.Consumer;
+
 import io.yale.tinyuikit.lib.func.SafeAction1;
 import io.yale.tinyuikit.lib.func.SafeFunc0;
 
@@ -239,6 +241,43 @@ public class ViewExtension {
                 T params = (T) view.getLayoutParams();
                 if (params != null) {
                     handler.call(params);
+                }
+            }
+        });
+    }
+
+    public static void v_forEach(Activity holder, int targetID, final SafeAction1<View> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(Fragment holder, int targetID, final SafeAction1<View> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(Dialog holder, int targetID, final SafeAction1<View> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(View holder, int targetID, final SafeAction1<View> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(ViewGroup target, final SafeAction1<View> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(target);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction1<View> handler) {
+        safeOperateView(finder, new SafeAction1<ViewGroup>() {
+            @Override
+            public void call(ViewGroup group) throws Exception {
+                int childCount = group.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    handler.call(group.getChildAt(i));
                 }
             }
         });
