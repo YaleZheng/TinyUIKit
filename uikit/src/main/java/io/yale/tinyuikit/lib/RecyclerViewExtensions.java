@@ -26,42 +26,54 @@ public class RecyclerViewExtensions {
     private RecyclerViewExtensions() {
     }
 
-    public static class DividerParams {
-        private int color = 0;
+    public static class DecorationParams {
+        private int fillColor = 0;
         private int height = 0;
         private int marginTop = 0;
         private int marginBottom = 0;
         private int marginStart = 0;
         private int marginEnd = 0;
+        private int headerCount = 0;
+        private int footerCount = 0;
 
-        public DividerParams setColor(int color) {
-            this.color = color;
+        public DecorationParams setFillColor(int fillColor) {
+            this.fillColor = fillColor;
             return this;
         }
 
-        public DividerParams setHeight(int height) {
+        public DecorationParams setHeight(int height) {
             this.height = height;
             return this;
         }
 
-        public DividerParams setMargin(int margin) {
+        public DecorationParams setMargin(int margin) {
             return setMargin(margin, margin, margin, margin);
         }
 
-        public DividerParams setMargin(int marginH, int marginV) {
+        public DecorationParams setMargin(int marginH, int marginV) {
             return setMargin(marginH, marginV, marginH, marginV);
         }
 
-        public DividerParams setMargin(int marginStart, int marginTop, int marginEnd, int marginBottom) {
+        public DecorationParams setMargin(int marginStart, int marginTop, int marginEnd, int marginBottom) {
             this.marginStart = marginStart;
             this.marginTop = marginTop;
             this.marginEnd = marginEnd;
             this.marginBottom = marginBottom;
             return this;
         }
+
+        public DecorationParams setHeaderCount(int headerCount) {
+            this.headerCount = headerCount;
+            return this;
+        }
+
+        public DecorationParams setFooterCount(int footerCount) {
+            this.footerCount = footerCount;
+            return this;
+        }
     }
 
-    public static void addDividerHorizontal(final RecyclerView recyclerView, final DividerParams params) {
+    public static void addDividerHorizontal(final RecyclerView recyclerView, final DecorationParams params) {
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             Rect rect = new Rect();
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -69,7 +81,6 @@ public class RecyclerViewExtensions {
             @Override
             public void onDrawOver(final Canvas c, RecyclerView rv, RecyclerView.State state) {
                 super.onDrawOver(c, rv, state);
-                int width = rv.getWidth();
                 ViewExtension.v_forEach(rv, new SafeAction1<View>() {
                     @Override
                     public void call(View child) throws Exception {
@@ -79,10 +90,28 @@ public class RecyclerViewExtensions {
                                 rect.right - params.marginEnd,
                                 rect.bottom + params.height - params.marginBottom);
                         paint.setStyle(Paint.Style.FILL);
-                        paint.setColor(params.color);
+                        paint.setColor(params.fillColor);
                         c.drawRect(rect, paint);
                     }
                 });
+            }
+        });
+    }
+
+    public static void addItemSpacing(final RecyclerView recyclerView, final DecorationParams params) {
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                int adapterPosition = parent.getChildAdapterPosition(view);
+                boolean isHeader = adapterPosition < params.headerCount;
+                int itemCount = parent.getAdapter() != null ? parent.getAdapter().getItemCount() : 0;
+                boolean isFooter = adapterPosition > params.headerCount + itemCount;
+                boolean isItem = !isHeader && !isFooter;
+                if (isItem) {
+                    outRect.setEmpty();
+                    outRect.set(params.marginStart, params.marginTop, params.marginEnd, params.marginBottom);
+                }
             }
         });
     }
