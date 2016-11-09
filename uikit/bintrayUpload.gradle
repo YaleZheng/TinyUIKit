@@ -1,14 +1,16 @@
+import java.util.function.BiConsumer
+
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 // load properties
 Properties properties = new Properties()
-File localPropertiesFile = project.file("local.properties");
-if(localPropertiesFile.exists()){
+File localPropertiesFile = rootProject.file("local.properties");
+if (localPropertiesFile.exists()) {
     properties.load(localPropertiesFile.newDataInputStream())
 }
-File projectPropertiesFile = project.file("project.properties");
-if(projectPropertiesFile.exists()){
+File projectPropertiesFile = rootProject.file("project.properties");
+if (projectPropertiesFile.exists()) {
     properties.load(projectPropertiesFile.newDataInputStream())
 }
 
@@ -90,7 +92,7 @@ artifacts {
 
 // javadoc configuration
 javadoc {
-    options{
+    options {
         encoding "UTF-8"
         charSet 'UTF-8'
         author true
