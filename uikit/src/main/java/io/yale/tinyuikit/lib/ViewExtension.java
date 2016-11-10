@@ -297,6 +297,10 @@ public class ViewExtension {
         v_updateLayoutParams(newFinder(holder, targetID), handler);
     }
 
+    public static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(View target, final SafeAction1<T> handler, Class<T> clazz) {
+        v_updateLayoutParams(newFinder(target), handler);
+    }
+
     public static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(Activity holder, int targetID, final SafeAction1<T> handler) {
         v_updateLayoutParams(newFinder(holder, targetID), handler);
     }
