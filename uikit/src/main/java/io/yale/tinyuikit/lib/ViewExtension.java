@@ -3,7 +3,10 @@ package io.yale.tinyuikit.lib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +16,10 @@ import java.util.function.Consumer;
 
 import io.yale.tinyuikit.lib.func.SafeAction1;
 import io.yale.tinyuikit.lib.func.SafeFunc0;
+import rx.functions.Action1;
+import rx.functions.Action4;
+import rx.functions.Func0;
+import rx.functions.Func4;
 
 import static io.yale.tinyuikit.lib.ViewFinders.newFinder;
 
@@ -341,6 +348,55 @@ public class ViewExtension {
         });
     }
 
+    public static class TextWatcherBuilder {
+        private Action4<CharSequence, Integer, Integer, Integer> beforeTextChanged;
+        private Action4<CharSequence, Integer, Integer, Integer> onTextChanged;
+        private Action1<Editable> afterTextChanged;
+
+        private TextWatcherBuilder() {
+        }
+
+        public TextWatcherBuilder beforeTextChanged(Action4<CharSequence, Integer, Integer, Integer> handler) {
+            this.beforeTextChanged = handler;
+            return this;
+        }
+
+        public TextWatcherBuilder onTextChanged(Action4<CharSequence, Integer, Integer, Integer> handler) {
+            this.onTextChanged = handler;
+            return this;
+        }
+
+        public TextWatcherBuilder afterTextChanged(Action1<Editable> handler) {
+            this.afterTextChanged = handler;
+            return this;
+        }
+
+        public TextWatcher build() {
+            return new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    if (beforeTextChanged != null) {
+                        beforeTextChanged.call(s, start, count, after);
+                    }
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (onTextChanged != null) {
+                        onTextChanged.call(s, start, before, count);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (afterTextChanged != null) {
+                        afterTextChanged.call(s);
+                    }
+                }
+            };
+        }
+    }
+
     public static void v_setText(Activity holder, int targetID, CharSequence text) {
         SafeFunc0<TextView> finder = newFinder(holder, targetID);
         v_setText(finder, text);
@@ -371,6 +427,46 @@ public class ViewExtension {
             @Override
             public void call(TextView view) throws Exception {
                 view.setText(text);
+            }
+        });
+    }
+
+    public static TextWatcherBuilder newTextWatcher() {
+        return new TextWatcherBuilder();
+    }
+
+    public static void v_addTextChanged(Activity holder, int targetID, TextWatcher watcher) {
+        SafeFunc0<TextView> finder = newFinder(holder, targetID);
+        v_addTextChanged(finder, watcher);
+    }
+
+    public static void v_addTextChanged(Fragment holder, int targetID, TextWatcher watcher) {
+        SafeFunc0<TextView> finder = newFinder(holder, targetID);
+        v_addTextChanged(finder, watcher);
+    }
+
+    public static void v_addTextChanged(Dialog holder, int targetID, TextWatcher watcher) {
+        SafeFunc0<TextView> finder = newFinder(holder, targetID);
+        v_addTextChanged(finder, watcher);
+    }
+
+    public static void v_addTextChanged(View holder, int targetID, TextWatcher watcher) {
+        SafeFunc0<TextView> finder = newFinder(holder, targetID);
+        v_addTextChanged(finder, watcher);
+    }
+
+    public static void v_addTextChanged(TextView target, TextWatcher watcher) {
+        SafeFunc0<TextView> finder = newFinder(target);
+        v_addTextChanged(finder, watcher);
+    }
+
+    private static void v_addTextChanged(SafeFunc0<TextView> finder, final TextWatcher watcher) {
+        safeOperateView(finder, new SafeAction1<TextView>() {
+            @Override
+            public void call(TextView view) throws Exception {
+                if (watcher != null) {
+                    view.addTextChangedListener(watcher);
+                }
             }
         });
     }
