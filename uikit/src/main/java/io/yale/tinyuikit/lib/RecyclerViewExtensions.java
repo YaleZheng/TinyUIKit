@@ -79,19 +79,27 @@ public class RecyclerViewExtensions {
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
             @Override
-            public void onDrawOver(final Canvas c, RecyclerView rv, RecyclerView.State state) {
+            public void onDrawOver(final Canvas c, final RecyclerView rv, RecyclerView.State state) {
                 super.onDrawOver(c, rv, state);
                 ViewExtension.v_forEach(rv, new SafeAction1<View>() {
                     @Override
                     public void call(View child) throws Exception {
-                        child.getLocalVisibleRect(rect);
-                        rect.set(rect.left + params.marginStart,
-                                rect.bottom + params.marginTop,
-                                rect.right - params.marginEnd,
-                                rect.bottom + params.height - params.marginBottom);
-                        paint.setStyle(Paint.Style.FILL);
-                        paint.setColor(params.fillColor);
-                        c.drawRect(rect, paint);
+                        int adapterPosition = rv.getChildAdapterPosition(child);
+                        boolean isHeader = adapterPosition < params.headerCount;
+                        int itemCount = rv.getAdapter() != null ? rv.getAdapter().getItemCount() : 0;
+                        boolean isFooter = adapterPosition > params.headerCount + itemCount;
+                        boolean isItem = !isHeader && !isFooter;
+                        boolean isLastItem = isItem && (adapterPosition == params.headerCount + itemCount);
+
+                        if (isItem && !isLastItem) {
+                            rect.set(child.getLeft() + params.marginStart,
+                                    child.getBottom() + params.marginTop,
+                                    child.getRight() - params.marginEnd,
+                                    child.getBottom() + params.height - params.marginBottom);
+                            paint.setStyle(Paint.Style.FILL);
+                            paint.setColor(params.fillColor);
+                            c.drawRect(rect, paint);
+                        }
                     }
                 });
             }
