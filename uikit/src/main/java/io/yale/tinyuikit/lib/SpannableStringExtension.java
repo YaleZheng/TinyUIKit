@@ -1,10 +1,12 @@
 package io.yale.tinyuikit.lib;
 
+import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.ScaleXSpan;
 import android.text.style.StrikethroughSpan;
@@ -24,6 +26,14 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
 public class SpannableStringExtension {
     private SpannableStringExtension() {
+    }
+
+    public static SpannableStringBuilder s_setImage(CharSequence text, Drawable drawable, int verticalAlign) {
+        return s_setSpan(valueOf(text), new ImageSpan(drawable, verticalAlign));
+    }
+
+    public static SpannableStringBuilder s_setImage(CharSequence text, Drawable drawable) {
+        return s_setSpan(valueOf(text), new ImageSpan(drawable));
     }
 
     public static SpannableStringBuilder s_setScaleX(CharSequence text, float factor) {
