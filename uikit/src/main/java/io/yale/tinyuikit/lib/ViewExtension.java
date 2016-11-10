@@ -92,7 +92,7 @@ public class ViewExtension {
         v_setVisibility(newFinder(holder, targetID), visibility);
     }
 
-    public static void v_setVisibility(SafeFunc0<View> finder, final int visibility) {
+    private static void v_setVisibility(SafeFunc0<View> finder, final int visibility) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -117,7 +117,7 @@ public class ViewExtension {
         v_setVisible(newFinder(holder, targetID));
     }
 
-    public static void v_setVisible(SafeFunc0<View> finder) {
+    private static void v_setVisible(SafeFunc0<View> finder) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -142,7 +142,7 @@ public class ViewExtension {
         v_setInvisible(newFinder(holder, targetID));
     }
 
-    public static void v_setInvisible(SafeFunc0<View> finder) {
+    private static void v_setInvisible(SafeFunc0<View> finder) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -167,7 +167,7 @@ public class ViewExtension {
         v_setGone(newFinder(holder, targetID));
     }
 
-    public static void v_setGone(SafeFunc0<View> finder) {
+    private static void v_setGone(SafeFunc0<View> finder) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -192,7 +192,7 @@ public class ViewExtension {
         v_setBackground(newFinder(holder, targetID), drawable);
     }
 
-    public static void v_setBackground(SafeFunc0<View> finder, final Drawable drawable) {
+    private static void v_setBackground(SafeFunc0<View> finder, final Drawable drawable) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -221,7 +221,7 @@ public class ViewExtension {
         v_setClickListener(newFinder(target), listener);
     }
 
-    public static void v_setClickListener(SafeFunc0<View> finder, final View.OnClickListener listener) {
+    private static void v_setClickListener(SafeFunc0<View> finder, final View.OnClickListener listener) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -250,7 +250,7 @@ public class ViewExtension {
         v_setFocusChangeListener(newFinder(target), listener);
     }
 
-    public static void v_setFocusChangeListener(SafeFunc0<View> finder, final View.OnFocusChangeListener listener) {
+    private static void v_setFocusChangeListener(SafeFunc0<View> finder, final View.OnFocusChangeListener listener) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
             public void call(View view) throws Exception {
@@ -291,7 +291,7 @@ public class ViewExtension {
         v_updateLayoutParams(newFinder(holder, targetID), handler);
     }
 
-    public static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(SafeFunc0<View> finder, final SafeAction1<T> handler) {
+    private static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(SafeFunc0<View> finder, final SafeAction1<T> handler) {
         safeOperateView(finder, new SafeAction1<View>() {
             @SuppressWarnings("unchecked")
             @Override
@@ -329,7 +329,7 @@ public class ViewExtension {
         v_forEach(finder, handler);
     }
 
-    public static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction1<View> handler) {
+    private static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction1<View> handler) {
         safeOperateView(finder, new SafeAction1<ViewGroup>() {
             @Override
             public void call(ViewGroup group) throws Exception {
@@ -366,7 +366,7 @@ public class ViewExtension {
         v_setText(finder, text);
     }
 
-    public static void v_setText(SafeFunc0<TextView> finder, final CharSequence text) {
+    private static void v_setText(SafeFunc0<TextView> finder, final CharSequence text) {
         safeOperateView(finder, new SafeAction1<TextView>() {
             @Override
             public void call(TextView view) throws Exception {
@@ -399,7 +399,7 @@ public class ViewExtension {
         v_setImageDrawable(newFinder(target), drawable);
     }
 
-    public static void v_setImageDrawable(SafeFunc0<ImageView> finder, final Drawable drawable) {
+    private static void v_setImageDrawable(SafeFunc0<ImageView> finder, final Drawable drawable) {
         safeOperateView(finder, new SafeAction1<ImageView>() {
             @Override
             public void call(ImageView imageView) throws Exception {
