@@ -3,7 +3,6 @@ package io.yale.tinyuikit.lib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,14 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.function.Consumer;
-
 import io.yale.tinyuikit.lib.func.SafeAction1;
 import io.yale.tinyuikit.lib.func.SafeFunc0;
 import rx.functions.Action1;
 import rx.functions.Action4;
-import rx.functions.Func0;
-import rx.functions.Func4;
 
 import static io.yale.tinyuikit.lib.ViewFinders.newFinder;
 
@@ -99,6 +94,10 @@ public class ViewExtension {
         v_setVisibility(newFinder(holder, targetID), visibility);
     }
 
+    public static void v_setVisibility(View target, int visibility) {
+        v_setVisibility(newFinder(target), visibility);
+    }
+
     private static void v_setVisibility(SafeFunc0<View> finder, final int visibility) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
@@ -122,6 +121,10 @@ public class ViewExtension {
 
     public static void v_setVisible(View holder, int targetID) {
         v_setVisible(newFinder(holder, targetID));
+    }
+
+    public static void v_setVisible(View target) {
+        v_setVisible(newFinder(target));
     }
 
     private static void v_setVisible(SafeFunc0<View> finder) {
@@ -149,6 +152,10 @@ public class ViewExtension {
         v_setInvisible(newFinder(holder, targetID));
     }
 
+    public static void v_setInvisible(View target) {
+        v_setInvisible(newFinder(target));
+    }
+
     private static void v_setInvisible(SafeFunc0<View> finder) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
@@ -174,6 +181,10 @@ public class ViewExtension {
         v_setGone(newFinder(holder, targetID));
     }
 
+    public static void v_setGone(View target) {
+        v_setGone(newFinder(target));
+    }
+
     private static void v_setGone(SafeFunc0<View> finder) {
         safeOperateView(finder, new SafeAction1<View>() {
             @Override
@@ -197,6 +208,10 @@ public class ViewExtension {
 
     public static void v_setBackground(View holder, int targetID, final Drawable drawable) {
         v_setBackground(newFinder(holder, targetID), drawable);
+    }
+
+    public static void v_setBackground(View target, final Drawable drawable) {
+        v_setBackground(newFinder(target), drawable);
     }
 
     private static void v_setBackground(SafeFunc0<View> finder, final Drawable drawable) {
@@ -296,6 +311,10 @@ public class ViewExtension {
 
     public static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(View holder, int targetID, final SafeAction1<T> handler) {
         v_updateLayoutParams(newFinder(holder, targetID), handler);
+    }
+
+    public static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(View target, final SafeAction1<T> handler) {
+        v_updateLayoutParams(newFinder(target), handler);
     }
 
     private static <T extends ViewGroup.LayoutParams> void v_updateLayoutParams(SafeFunc0<View> finder, final SafeAction1<T> handler) {
