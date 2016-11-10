@@ -94,3 +94,18 @@ provide some helper function to simple your programing on ui
                     s_setTextColor("normal text with red color", 0xFFFF0000),
                     s_setRelativeFontSize(s_setTextColor("bigger text with green color", 0xFF00FF00), 1.5f));
  ```
+
+5.provide a simple way to get nullable value
+```java
+    \\ consider u want to get string e from a.b.c.d,if null return "empty"
+    \\ common way
+    String ret;
+    if(a != null && a.b != null && a.b.c != null && a.b.c.d != null && a.b.c.d.e != null) {
+        ret = a.b.c.d.e;
+    } else {
+        ret = "empty";
+    }
+    
+    \\ now
+    ret = safeGet(() -> a.b.c.d.e, "empty");
+```
