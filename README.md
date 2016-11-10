@@ -1,3 +1,5 @@
+ [ ![Download](https://api.bintray.com/packages/yalezheng/maven/TinyUIKit/images/download.svg) ](https://bintray.com/yalezheng/maven/TinyUIKit/_latestVersion)
+
 # TinyUIKit
 provide some helper function to simple your programing on ui
 
