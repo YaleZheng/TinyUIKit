@@ -159,7 +159,9 @@ public class RecyclerViewExtensions {
             this.onVHCreated = new Action3<SimpleAdapter<T>, Integer, SimpleVH>() {
                 @Override
                 public void call(SimpleAdapter<T> ad, Integer type, SimpleVH vh) {
+                    vh.binder.attachRoot(vh.itemView);
                     handler.call(ad, type, vh, vh.binder);
+                    vh.binder.detachRoot();
                 }
             };
             return this;
