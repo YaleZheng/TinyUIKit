@@ -246,6 +246,13 @@ public class RecyclerViewExtensions {
             return currentHeaderCount + currentItemCount + currentFooterCount;
         }
 
+        public void resetItems(List<T> items) {
+            this.items.clear();
+            if (items != null) {
+                this.items.addAll(items);
+            }
+            computeItemCount();
+        }
 
         public T getItem(int adapterPosition) {
             int position = adapterPosition - this.currentHeaderCount;
