@@ -2,9 +2,9 @@ package io.yale.tinyuikit.lib;
 
 import android.text.TextUtils;
 
-import io.yale.tinyuikit.lib.func.SafeAction0;
-import io.yale.tinyuikit.lib.func.SafeAction1;
-import io.yale.tinyuikit.lib.func.SafeFunc0;
+import io.yale.rxfunction.lib.func.SafeAction0;
+import io.yale.rxfunction.lib.func.SafeFunc0;
+
 
 /**
  * Created by yalez on 2016/11/10.

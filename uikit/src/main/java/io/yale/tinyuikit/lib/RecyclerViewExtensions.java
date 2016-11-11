@@ -13,10 +13,11 @@ import android.widget.FrameLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.yale.tinyuikit.lib.func.SafeAction1;
-import rx.functions.Action3;
-import rx.functions.Action4;
-import rx.functions.Func2;
+import io.yale.rxfunction.lib.func.Action3;
+import io.yale.rxfunction.lib.func.Action4;
+import io.yale.rxfunction.lib.func.Func2;
+import io.yale.rxfunction.lib.func.SafeAction1;
+
 
 /**
  * Created by yalez on 2016/11/8.

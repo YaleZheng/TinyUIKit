@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import io.yale.tinyuikit.lib.func.SafeAction1;
-import io.yale.tinyuikit.lib.func.SafeFunc0;
-import rx.functions.Action1;
-import rx.functions.Action4;
+
+import io.yale.rxfunction.lib.func.Action1;
+import io.yale.rxfunction.lib.func.Action4;
+import io.yale.rxfunction.lib.func.SafeAction1;
+import io.yale.rxfunction.lib.func.SafeFunc0;
 
 import static io.yale.tinyuikit.lib.ViewFinders.newFinder;
 

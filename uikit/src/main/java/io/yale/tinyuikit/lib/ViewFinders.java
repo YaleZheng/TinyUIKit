@@ -5,7 +5,7 @@ import android.app.Dialog;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import io.yale.tinyuikit.lib.func.SafeFunc0;
+import io.yale.rxfunction.lib.func.SafeFunc0;
 
 /**
  * Created by yalez on 2016/11/8.
