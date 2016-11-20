@@ -14,6 +14,7 @@ import android.widget.TextView;
 import io.yale.rxfunction.lib.func.Action1;
 import io.yale.rxfunction.lib.func.Action4;
 import io.yale.rxfunction.lib.func.SafeAction1;
+import io.yale.rxfunction.lib.func.SafeAction2;
 import io.yale.rxfunction.lib.func.SafeFunc0;
 
 import static io.yale.tinyuikit.lib.ViewFinders.newFinder;
@@ -395,6 +396,42 @@ public class ViewExtension {
                 int childCount = group.getChildCount();
                 for (int i = 0; i < childCount; i++) {
                     handler.call(group.getChildAt(i));
+                }
+            }
+        });
+    }
+
+    public static void v_forEach(Activity holder, int targetID, final SafeAction2<View,Integer> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(Fragment holder, int targetID, final SafeAction2<View,Integer> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(Dialog holder, int targetID, final SafeAction2<View,Integer> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(View holder, int targetID, final SafeAction2<View,Integer> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
+        v_forEach(finder, handler);
+    }
+
+    public static void v_forEach(ViewGroup target, final SafeAction2<View,Integer> handler) {
+        SafeFunc0<ViewGroup> finder = newFinder(target);
+        v_forEach(finder, handler);
+    }
+    private static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction2<View,Integer> handler) {
+        safeOperateView(finder, new SafeAction1<ViewGroup>() {
+            @Override
+            public void call(ViewGroup group) throws Exception {
+                int childCount = group.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    handler.call(group.getChildAt(i), i);
                 }
             }
         });
