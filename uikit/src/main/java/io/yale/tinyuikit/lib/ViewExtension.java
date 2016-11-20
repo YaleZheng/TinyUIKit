@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import io.yale.rxfunction.lib.func.Action1;
 import io.yale.rxfunction.lib.func.Action4;
 import io.yale.rxfunction.lib.func.SafeAction1;
@@ -220,6 +219,35 @@ public class ViewExtension {
             @Override
             public void call(View view) throws Exception {
                 view.setBackgroundDrawable(drawable);
+            }
+        });
+    }
+
+    public static void v_setSelected(Activity holder, int targetID, boolean selected) {
+        v_setSelected(newFinder(holder, targetID), selected);
+    }
+
+    public static void v_setSelected(Fragment holder, int targetID, boolean selected) {
+        v_setSelected(newFinder(holder, targetID), selected);
+    }
+
+    public static void v_setSelected(Dialog holder, int targetID, boolean selected) {
+        v_setSelected(newFinder(holder, targetID), selected);
+    }
+
+    public static void v_setSelected(View holder, int targetID, boolean selected) {
+        v_setSelected(newFinder(holder, targetID), selected);
+    }
+
+    public static void v_setSelected(View target, boolean selected) {
+        v_setSelected(newFinder(target), selected);
+    }
+
+    private static void v_setSelected(SafeFunc0<View> finder, final boolean selected) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setSelected(selected);
             }
         });
     }
