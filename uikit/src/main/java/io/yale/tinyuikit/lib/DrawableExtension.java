@@ -5,8 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -102,7 +100,7 @@ public class DrawableExtension {
                         }
 
                         if (borderWidthInPx > 0 && borderColor != 0) {
-                            boundsF.inset(borderWidthInPx, borderColor);
+                            boundsF.inset(borderWidthInPx, borderWidthInPx);
                             paint.setStyle(Paint.Style.STROKE);
                             paint.setColor(borderColor);
                             canvas.drawRoundRect(boundsF, radiusInPx, radiusInPx, paint);
