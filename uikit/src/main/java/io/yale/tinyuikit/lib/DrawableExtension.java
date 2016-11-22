@@ -66,7 +66,9 @@ public class DrawableExtension {
 
     public static class RoundCornerDrawableBuilder {
         private int fillColor = 0;
+        private int fillAlpha = 0;
         private int borderColor = 0;
+        private int borderAlpha = 0;
         private int borderWidthInPx = 0;
         private int radiusInPx;
         private Rect bounds = new Rect();
@@ -75,11 +77,13 @@ public class DrawableExtension {
         public RoundCornerDrawableBuilder(int fillColor, int radiusInPx) {
             this.fillColor = fillColor;
             this.radiusInPx = radiusInPx;
+            this.fillAlpha = (fillColor >> 24) & 0xFF;
         }
 
         public RoundCornerDrawableBuilder setBorder(int borderColor, int borderWidthInPx) {
             this.borderColor = borderColor;
             this.borderWidthInPx = borderWidthInPx;
+            this.borderAlpha = (borderColor >> 24) & 0xFF;
             return this;
         }
 
@@ -87,24 +91,22 @@ public class DrawableExtension {
             return new ShapeDrawable(new Shape() {
                 @Override
                 public void draw(Canvas canvas, Paint paint) {
-                    if (radiusInPx == 0) {
-                        canvas.drawColor(fillColor);
-                    } else {
-                        canvas.getClipBounds(bounds);
-                        boundsF.set(bounds);
+                    canvas.getClipBounds(bounds);
+                    boundsF.set(bounds);
 
-                        paint.setStyle(Paint.Style.FILL);
-                        if (fillColor != 0) {
-                            paint.setColor(fillColor);
-                            canvas.drawRoundRect(boundsF, radiusInPx, radiusInPx, paint);
-                        }
+                    paint.setStyle(Paint.Style.FILL);
+                    if (fillColor != 0) {
+                        paint.setColor(fillColor);
+                        paint.setAlpha(fillAlpha);
+                        canvas.drawRoundRect(boundsF, radiusInPx, radiusInPx, paint);
+                    }
 
-                        if (borderWidthInPx > 0 && borderColor != 0) {
-                            boundsF.inset(borderWidthInPx, borderWidthInPx);
-                            paint.setStyle(Paint.Style.STROKE);
-                            paint.setColor(borderColor);
-                            canvas.drawRoundRect(boundsF, radiusInPx, radiusInPx, paint);
-                        }
+                    if (borderWidthInPx > 0 && borderColor != 0) {
+                        boundsF.inset(borderWidthInPx, borderWidthInPx);
+                        paint.setStyle(Paint.Style.STROKE);
+                        paint.setColor(borderColor);
+                        paint.setAlpha(borderAlpha);
+                        canvas.drawRoundRect(boundsF, radiusInPx, radiusInPx, paint);
                     }
                 }
             });

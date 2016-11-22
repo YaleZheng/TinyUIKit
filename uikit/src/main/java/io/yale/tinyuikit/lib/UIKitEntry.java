@@ -26,10 +26,12 @@ public class UIKitEntry {
 
         if (application != null) {
             DrawableExtension.init(application);
+            ContextExtension.init(application);
         }
     }
 
     public static void destory() {
         DrawableExtension.destroy();
+        ContextExtension.destroy();
     }
 }
