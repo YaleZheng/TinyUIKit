@@ -3,6 +3,11 @@
 # TinyUIKit
 provide some helper function to simple your programing on ui
 
+##COMPILE
+```gradle
+    compile 'io.yale:uikit:0.3.0'
+```
+
 ##USAGE
 
 1.provide a simple way to find view
