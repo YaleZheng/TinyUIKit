@@ -29,7 +29,6 @@ dependencies {
     testCompile "junit:junit:${JUNIT_VERSION}"
     compile fileTree(dir: 'libs', include: ['*.jar'])
 //    compile "io.yale:uikit:0.1.0"
-//    compile project(':uikit')
-    compile ('io.yale:uikit:0.2.3')
+    compile project(':uikit')
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
 }
