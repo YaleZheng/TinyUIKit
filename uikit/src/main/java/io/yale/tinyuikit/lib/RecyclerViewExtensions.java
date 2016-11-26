@@ -125,6 +125,38 @@ public class RecyclerViewExtensions {
         });
     }
 
+    public static boolean isScrollToTop(RecyclerView recyclerView) {
+        if (recyclerView == null || recyclerView.getAdapter() == null)
+            return false;
+
+        int childCount = recyclerView.getChildCount();
+        if (childCount > 0) {
+            View firstChild = recyclerView.getChildAt(0);
+            int firstChildAdapterPos = recyclerView.getChildAdapterPosition(firstChild);
+            if (firstChildAdapterPos == 0 && firstChild.getTop() >= 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isScrollToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null || recyclerView.getAdapter() == null)
+            return false;
+
+        int childCount = recyclerView.getChildCount();
+        if (childCount > 0) {
+            View lastChild = recyclerView.getChildAt(childCount - 1);
+            int lastChildAdapterPos = recyclerView.getChildAdapterPosition(lastChild);
+            if (lastChildAdapterPos == recyclerView.getAdapter().getItemCount() - 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static <T> AdapterBuilder<T> newAdapter(List<T> items) {
         return new AdapterBuilder<>(items);
     }
