@@ -49,6 +49,14 @@ public class ContextExtension {
         outRect.set(0, 0, sMetrics.widthPixels, sMetrics.heightPixels);
     }
 
+    public static String getString(int resID) {
+        return sRes.getString(resID);
+    }
+
+    public static String getString(int resID, Object... args) {
+        return sRes.getString(resID, args);
+    }
+
     public static Drawable getDrawable(int drawableID) {
         return ResourcesCompat.getDrawable(sRes, drawableID, null);
     }
