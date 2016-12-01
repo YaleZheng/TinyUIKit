@@ -5,7 +5,7 @@ provide some helper function to simple your programing on ui
 
 ##COMPILE
 ```gradle
-    compile 'io.yale:uikit:0.3.0'
+    compile 'io.yale:uikit:0.3.2'
 ```
 
 ##USAGE
