@@ -2,6 +2,7 @@ package io.yale.tinyuikit.lib;
 
 import android.text.TextUtils;
 
+import io.yale.rxfunction.lib.func.Action1;
 import io.yale.rxfunction.lib.func.SafeAction0;
 import io.yale.rxfunction.lib.func.SafeFunc0;
 
@@ -12,6 +13,17 @@ import io.yale.rxfunction.lib.func.SafeFunc0;
 
 public class ObjectExtension {
     private ObjectExtension() {
+    }
+
+    public static <T> void safeOperate(SafeFunc0<T> getter, Action1<T> operator) {
+        try {
+            T target = getter.call();
+            if (target != null) {
+                operator.call(target);
+            }
+        } catch (Exception e) {
+            handleException(e);
+        }
     }
 
     public static void safeCall(SafeAction0 block) {
