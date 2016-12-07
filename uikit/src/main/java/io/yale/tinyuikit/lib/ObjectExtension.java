@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import io.yale.rxfunction.lib.func.Action1;
 import io.yale.rxfunction.lib.func.SafeAction0;
+import io.yale.rxfunction.lib.func.SafeAction1;
 import io.yale.rxfunction.lib.func.SafeFunc0;
 
 
@@ -15,7 +16,7 @@ public class ObjectExtension {
     private ObjectExtension() {
     }
 
-    public static <T> void safeOperate(SafeFunc0<T> getter, Action1<T> operator) {
+    public static <T> void safeOperate(SafeFunc0<T> getter, SafeAction1<T> operator) {
         try {
             T target = getter.call();
             if (target != null) {
