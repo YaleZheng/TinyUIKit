@@ -108,6 +108,64 @@ public class ViewExtension {
         });
     }
 
+    public static void v_setVisibleOrGone(Activity holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrGone(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrGone(Fragment holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrGone(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrGone(Dialog holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrGone(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrGone(View holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrGone(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrGone(View target, final boolean isVisible) {
+        v_setVisibleOrGone(newFinder(target), isVisible);
+    }
+
+    private static void v_setVisibleOrGone(SafeFunc0<View> finder, final boolean isVisible) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    public static void v_setVisibleOrInvisible(Activity holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrInvisible(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrInvisible(Fragment holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrInvisible(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrInvisible(Dialog holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrInvisible(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrInvisible(View holder, int targetID, final boolean isVisible) {
+        v_setVisibleOrInvisible(newFinder(holder, targetID), isVisible);
+    }
+
+    public static void v_setVisibleOrInvisible(View target, final boolean isVisible) {
+        v_setVisibleOrInvisible(newFinder(target), isVisible);
+    }
+
+    private static void v_setVisibleOrInvisible(SafeFunc0<View> finder, final boolean isVisible) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+    }
+
     public static void v_setVisible(Activity holder, int targetID) {
         v_setVisible(newFinder(holder, targetID));
     }
@@ -249,6 +307,35 @@ public class ViewExtension {
             @Override
             public void call(View view) throws Exception {
                 view.setSelected(selected);
+            }
+        });
+    }
+
+    public static void v_setEnabled(Activity holder, int targetID, final boolean enabled) {
+        v_setEnabled(newFinder(holder, targetID), enabled);
+    }
+
+    public static void v_setEnabled(Fragment holder, int targetID, final boolean enabled) {
+        v_setEnabled(newFinder(holder, targetID), enabled);
+    }
+
+    public static void v_setEnabled(Dialog holder, int targetID, final boolean enabled) {
+        v_setEnabled(newFinder(holder, targetID), enabled);
+    }
+
+    public static void v_setEnabled(View holder, int targetID, final boolean enabled) {
+        v_setEnabled(newFinder(holder, targetID), enabled);
+    }
+
+    public static void v_setEnabled(View target, final boolean enabled) {
+        v_setEnabled(newFinder(target), enabled);
+    }
+
+    private static void v_setEnabled(SafeFunc0<View> finder, final boolean enabled) {
+        safeOperateView(finder, new SafeAction1<View>() {
+            @Override
+            public void call(View view) throws Exception {
+                view.setEnabled(enabled);
             }
         });
     }
@@ -401,31 +488,32 @@ public class ViewExtension {
         });
     }
 
-    public static void v_forEach(Activity holder, int targetID, final SafeAction2<View,Integer> handler) {
+    public static void v_forEach(Activity holder, int targetID, final SafeAction2<View, Integer> handler) {
         SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
         v_forEach(finder, handler);
     }
 
-    public static void v_forEach(Fragment holder, int targetID, final SafeAction2<View,Integer> handler) {
+    public static void v_forEach(Fragment holder, int targetID, final SafeAction2<View, Integer> handler) {
         SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
         v_forEach(finder, handler);
     }
 
-    public static void v_forEach(Dialog holder, int targetID, final SafeAction2<View,Integer> handler) {
+    public static void v_forEach(Dialog holder, int targetID, final SafeAction2<View, Integer> handler) {
         SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
         v_forEach(finder, handler);
     }
 
-    public static void v_forEach(View holder, int targetID, final SafeAction2<View,Integer> handler) {
+    public static void v_forEach(View holder, int targetID, final SafeAction2<View, Integer> handler) {
         SafeFunc0<ViewGroup> finder = newFinder(holder, targetID);
         v_forEach(finder, handler);
     }
 
-    public static void v_forEach(ViewGroup target, final SafeAction2<View,Integer> handler) {
+    public static void v_forEach(ViewGroup target, final SafeAction2<View, Integer> handler) {
         SafeFunc0<ViewGroup> finder = newFinder(target);
         v_forEach(finder, handler);
     }
-    private static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction2<View,Integer> handler) {
+
+    private static void v_forEach(SafeFunc0<ViewGroup> finder, final SafeAction2<View, Integer> handler) {
         safeOperateView(finder, new SafeAction1<ViewGroup>() {
             @Override
             public void call(ViewGroup group) throws Exception {
