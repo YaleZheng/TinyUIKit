@@ -1,16 +1,19 @@
  [ ![Download](https://api.bintray.com/packages/yalezheng/maven/TinyUIKit/images/download.svg) ](https://bintray.com/yalezheng/maven/TinyUIKit/_latestVersion)
 
 # TinyUIKit
+
 provide some helper function to simple your programing on ui
 
-##COMPILE
+## COMPILE
+
 ```gradle
     compile 'io.yale:uikit:0.3.5'
 ```
 
-##USAGE
+## USAGE
 
 1.provide a simple way to find view
+
 ```java
 
     Activity act;
@@ -33,6 +36,7 @@ provide some helper function to simple your programing on ui
 ```
 
 2.provide a simple way to update view
+
  ```java
     TextView nameLabel;
     ViewGroup group;
@@ -55,6 +59,7 @@ provide some helper function to simple your programing on ui
  ```
  
  3.provide a simple way to create RecyclerView adapter
+ 
  ```java
     \\ common way
     
@@ -85,6 +90,7 @@ provide some helper function to simple your programing on ui
  ```
  
  4.provide a simple way to build SpannableString
+ 
  ```java
     \\ common way
     SpannableString line1 = new SpannableString("normal text with red color");
@@ -101,6 +107,7 @@ provide some helper function to simple your programing on ui
  ```
 
 5.provide a simple way to get nullable value
+
 ```java
     \\ consider u want to get string e from a.b.c.d,if null return "empty"
     \\ common way
